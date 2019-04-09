@@ -1,0 +1,82 @@
+img {
+  width: 100%;
+}
+
+.landing {
+  position: relative;
+  background: url('./img/showcase.jpg') no-repeat;
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  margin-top: -24px;
+  margin-bottom: -50px;
+}
+
+.landing-inner {
+  padding-top: 80px;
+}
+
+.dark-overlay {
+  background-color: rgba(0, 0, 0, 0.7);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.card-form {
+  opacity: 0.9;
+}
+
+.latest-profiles-img {
+  width: 40px;
+  height: 40px;
+}
+
+.form-control::placeholder {
+  color: #bbb !important;
+}
+
+.dashboard-Graph {
+  display: grid;
+    grid-gap: 5px;
+    grid-template-columns: repeat(auto-fill, minmax(600px, 1fr));
+    grid-auto-rows: 500px;
+}
+
+.dashboard-Graph > div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2em;
+  color: #ffeead;
+}
+
+.resultDrop {
+  display: flex;
+  justify-content: center;
+}
+
+.dropdownResult {
+  background-color: #E6B0AA;
+  padding: 20px;
+  font-size: 20px;
+  font-weight: 800;
+}
+
+/* .dashboard-Graph > div:nth-child(1n) {
+  background-color: #96ceb4;	
+}
+
+.dashboard-Graph > div:nth-child(3n) {
+  background-color: #88d8b0;
+}
+
+.dashboard-Graph > div:nth-child(2n) {
+      background-color: #ff6f69;
+}
+
+.dashboard-Graph > div:nth-child(4n) {
+      background-color: #ffcc5c;
+} */
