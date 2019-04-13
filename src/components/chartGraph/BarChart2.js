@@ -2,64 +2,41 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bargraph2 } from '../../actions/graphActions';
+import axios from 'axios';
 import * as d3 from 'd3';
 import './BarChart2.css';
 
 class BarChart2 extends Component {
 
     state = {
-        "result": [
-            {
-                "key": "D L Methionine 99% - 1 Kg",
-                "value": 51347221.699999996
-            },
-            {
-                "key": "POULTRY FEED DCP 50 KG",
-                "value": 19461295
-            },
-            {
-                "key": "Rhodimate AT 88",
-                "value": 17773367.930000003
-            },
-            {
-                "key": "Rovabio Advanced T-Flex 1kg",
-                "value": 16493500
-            },
-            {
-                "key": "Poultry Feed DCP Rock                     50 Kg",
-                "value": 16132628
-            },
-            {
-                "key": "Microvit E Promix (VIT E)",
-                "value": 15534235
-            },
-            {
-                "key": "POULTRY FEED DCP FS           50 KG",
-                "value": 12380335
-            },
-            {
-                "key": "L - Lysine 99% - 1 Kg",
-                "value": 12356318.44
-            },
-            {
-                "key": "CHOLINE CHLORIDE-A 1 KG",
-                "value": 12072075
-            },
-            {
-                "key": "Alterion  1 Kg",
-                "value": 11205750
-            }
-        ]
+        result: []
     }
 
     componentDidMount(){
-        if(!this.props.auth.isAuthenticated){
-            this.props.history.push('/login');
+        // if(!this.props.auth.isAuthenticated){
+        //     this.props.history.push('/login');
+        // }
+
+        // this.props.bargraph2();
+
+        // this.barChart2();
+        const headers = {
+            'Authorization': localStorage.jwtToken
         }
-
-        this.props.bargraph2();
-
-        this.barChart2();
+        // console.log(headers);
+        axios.post('/itemwise_aggregated_salse_in_amt/barchart2',{},{headers})
+            .then(res => {
+                // console.log(res.data.result)
+                // console.log(this.state.result)
+                this.setState({
+                    result: [...res.data.result]
+                })
+                console.log(this.state.result)
+                this.barChart2();
+            })
+            .catch(err => {
+                console.log(err.response.data)
+            })
     }
 
     barChart2 = () => {
@@ -159,10 +136,10 @@ class BarChart2 extends Component {
 
     render() {
 
-        const { bargraph2 } = this.props.graph;
-        if(bargraph2 != null){
-            console.log(bargraph2);
-        }
+        // const { bargraph2 } = this.props.graph;
+        // if(bargraph2 != null){
+        //     console.log(bargraph2);
+        // }
 
         return (
             <div id="barchart2"></div>

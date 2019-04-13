@@ -2,41 +2,42 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { piechart } from '../../actions/graphActions';
+import axios from 'axios';
 import * as d3 from 'd3';
 import './pieChart.css';
 
 class PieChart extends Component {
 
     state = {
-        "result": [
-            {
-                "key": "quater-1",
-                "value": 158720365.68999895
-            },
-            {
-                "key": "quater-2",
-                "value": 113485369.29000033
-            },
-            {
-                "key": "quater-3",
-                "value": 114411286.50999978
-            },
-            {
-                "key": "quater-4",
-                "value": 55938441.900000416
-            }
-        ]
+        result: []
     }
 
     componentDidMount(){
 
-        if(!this.props.auth.isAuthenticated){
-            this.props.history.push('/login');
+        // if(!this.props.auth.isAuthenticated){
+        //     this.props.history.push('/login');
+        // }
+
+        // this.props.piechart();
+
+        // this.piechart();
+        const headers = {
+            'Authorization': localStorage.jwtToken
         }
-
-        this.props.piechart();
-
-        this.piechart();
+        // console.log(headers);
+        axios.post('/quaterly_sales/piechart',{},{headers})
+            .then(res => {
+                // console.log(res.data.result)
+                // console.log(this.state.result)
+                this.setState({
+                    result: [...res.data.result]
+                })
+                console.log(this.state.result)
+                this.piechart();
+            })
+            .catch(err => {
+                console.log(err.response.data)
+            })
     }
 
     piechart = () => {
@@ -169,10 +170,10 @@ class PieChart extends Component {
 
     render() {
 
-        const { piegraph } = this.props.graph;
-        if(piegraph != null){
-            console.log(piegraph);
-        }
+        // const { piegraph } = this.props.graph;
+        // if(piegraph != null){
+        //     console.log(piegraph);
+        // }
 
         return (
             <div id="piechart"></div>

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bargraph1 } from '../../actions/graphActions';
+import axios from 'axios';
 import * as d3 from 'd3';
 import './BarChart.css';
 
@@ -33,59 +34,47 @@ class Barchart1 extends Component {
     // }
 
     state = {
-        "result": [
-            {
-                "key": "Kavi Protein And Feed Pvt Ltd",
-                "value": 31164474.440000005
-            },
-            {
-                "key": "Prism Feeds India Pvt Ltd",
-                "value": 23718481.79
-            },
-            {
-                "key": "Kavi Protein and Feed Pvt Ltd-Krishnagiri",
-                "value": 20203559.399999995
-            },
-            {
-                "key": "CPF India Pvt Ltd-H Junction",
-                "value": 18500341.35
-            },
-            {
-                "key": "Khadkeshwara Hatcheries Pvt Ltd White",
-                "value": 8719798.580000004
-            },
-            {
-                "key": "Cash",
-                "value": 7741926.549999904
-            },
-            {
-                "key": "D.K.Poultry (Feed)",
-                "value": 7437088.36
-            },
-            {
-                "key": "Pragathi Hatcheries",
-                "value": 5902786.949999999
-            },
-            {
-                "key": "Standard Farms",
-                "value": 5846468.479999999
-            },
-            {
-                "key": "Arun Enterprises - S.Dr",
-                "value": 5545062
-            }
-        ]
+        result: []
     }
 
     componentDidMount(){
-        if(!this.props.auth.isAuthenticated){
-            this.props.history.push('/login');
+
+        // if(!this.props.auth.isAuthenticated){
+        //     this.props.history.push('/login');
+        // }
+        // const { bargraph1 } = this.props.graph;
+        // if(bargraph1 !=null){
+        //     console.log(bargraph1);
+        // }
+
+        // this.props.bargraph1();
+
+        // this.barChart1();
+        const headers = {
+            'Authorization': localStorage.jwtToken
         }
-
-        this.props.bargraph1();
-
-        this.barChart1();
+        // console.log(headers);
+        axios.post('/partywise_aggregated_sales/barchart1',{},{headers})
+            .then(res => {
+                // console.log(res.data.result)
+                // console.log(this.state.result)
+                this.setState({
+                    result: [...res.data.result]
+                })
+                console.log(this.state.result)
+                this.barChart1();
+            })
+            .catch(err => {
+                console.log(err.response.data)
+            })
     }
+
+    // componentWillReceiveProps(){
+    //     const { bargraph1 } = this.props.graph;
+    //     if(bargraph1 !=null){
+    //         console.log(bargraph1);
+    //     }
+    // }
 
     barChart1 = () => {
         let width = 860, height = 500;
@@ -124,7 +113,7 @@ class Barchart1 extends Component {
                     .remove();
 
                 xaxisG.append('text')
-                .attr("class", "axis-label")
+                .attr("class", "rect1-axis-label")
                 .attr('y', 40)
                 .attr('x', innerwidth / 2)
                 .attr("fill", "black")
@@ -142,11 +131,11 @@ class Barchart1 extends Component {
             //yaxis(g.append('g'));
             const yaxisG = g.append('g').call(yaxis)
 
-            yaxisG.selectAll('.domain, .tick line')
+            yaxisG.selectAll('.domain, .rect1-tick-line')
                             .remove()
 
             yaxisG.append('text')
-                .attr("class", "Yaxis-label")
+                .attr("class", "rect1-Yaxis-label")
                 .attr('y', -195)
                 .attr('x', -150)
                 .attr("fill", "black")
@@ -179,10 +168,10 @@ class Barchart1 extends Component {
     
     render() {
 
-        const { bargraph1 } = this.props.graph;
-        if(bargraph1 !=null){
-            console.log(bargraph1);
-        }
+        // const { bargraph1 } = this.props.graph;
+        // if(bargraph1 !=null){
+        //     console.log(bargraph1);
+        // }
         
         return (
             <div id="barchart1"></div>

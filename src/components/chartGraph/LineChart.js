@@ -2,68 +2,41 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { linechart } from '../../actions/graphActions';
+import axios from 'axios';
 import * as d3 from 'd3';
 import './LineChart.css';
 
 class LineChart extends Component {
 
     state = {
-        "result": [
-            {
-                "key": "April-2018",
-                "value": 56975192.91000037
-            },
-            {
-                "key": "May-2018",
-                "value": 55388226.810000286
-            },
-            {
-                "key": "June-2018",
-                "value": 46356945.970000274
-            },
-            {
-                "key": "July-2018",
-                "value": 40232950.50000022
-            },
-            {
-                "key": "August-2018",
-                "value": 38006945.62000019
-            },
-            {
-                "key": "September-2018",
-                "value": 35245473.17000014
-            },
-            {
-                "key": "October-2018",
-                "value": 35372536.59000018
-            },
-            {
-                "key": "November-2018",
-                "value": 40178174.07000013
-            },
-            {
-                "key": "December-2018",
-                "value": 38860575.85000017
-            },
-            {
-                "key": "February-2019",
-                "value": 16918749.550000012
-            },
-            {
-                "key": "January-2019",
-                "value": 39019692.35000027
-            }
-        ]
+        result: []
     }
 
     componentDidMount(){
-        if(!this.props.auth.isAuthenticated){
-            this.props.history.push('/login');
+        // if(!this.props.auth.isAuthenticated){
+        //     this.props.history.push('/login');
+        // }
+
+        // this.props.linechart();
+
+        // this.linechart()
+        const headers = {
+            'Authorization': localStorage.jwtToken
         }
-
-        this.props.linechart();
-
-        this.linechart()
+        // console.log(headers);
+        axios.post('/montly_sales/linechart',{},{headers})
+            .then(res => {
+                // console.log(res.data.result)
+                // console.log(this.state.result)
+                this.setState({
+                    result: [...res.data.result]
+                })
+                console.log(this.state.result)
+                this.linechart();
+            })
+            .catch(err => {
+                console.log(err.response.data)
+            })
     }
 
     linechart = () => {
@@ -226,10 +199,10 @@ class LineChart extends Component {
 
     render() {
 
-        const { linegraph } = this.props.graph;
-        if(linegraph != null){
-            console.log(linegraph);
-        }
+        // const { linegraph } = this.props.graph;
+        // if(linegraph != null){
+        //     console.log(linegraph);
+        // }
 
         return (
             <div id="linechart"></div>
