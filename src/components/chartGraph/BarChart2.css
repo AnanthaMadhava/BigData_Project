@@ -1,4 +1,4 @@
-rect{
+.rect2{
     fill: rgb(103, 70, 180);    
     opacity: 0.5;
 }
@@ -10,29 +10,28 @@ text{
 .tick text {
     font-size: 1.0em;
     fill: #696969;
-    
 }
 
-.tick line {
+/* .tick line {
     stroke: #C0C0BB;
     opacity: 0.4;
     
-}
+} */
 
-.axis-label {
+.rect2-axis-label {
     font-size: 2.0em;
     fill: #696969;
     
 }
 
-.Yaxis-label {
+.rect2-Yaxis-label {
     font-size: 2.0em;
     fill: #696969;
     text-anchor: middle;
     
 }
 
-.title {
+.rect2-title {
     font-size: 1em;
     text-anchor: middle;
 }

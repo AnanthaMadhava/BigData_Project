@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import jwt_decode from 'jwt-decode';
 import setAuthToken from './utils/setAuthToken';
 import { setCurrentUser, logoutUser } from './actions/authActions';
@@ -11,12 +11,13 @@ import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
 import Landing from './components/layout/Landing';
 
-import Dashboard from './components/dashboard/Dashboard';
+import Analytics from './components/analytics/Analytics';
 
 import Register from './components/register__login/Register';
 import Login from './components/register__login/Login';
 
-import Home from './components/home';
+import Item from './components/predictionModel/Item';
+import Customer from './components/predictionModel/Customer';
 
 import Barchart1 from './components/chartGraph/Barchart1';
 
@@ -24,6 +25,7 @@ import './App.css';
 import BarChart2 from './components/chartGraph/BarChart2';
 import LineChart from './components/chartGraph/LineChart';
 import PieChart from './components/chartGraph/PieChart';
+import Home from './components/home/Home';
 
 // Check for token
 if(localStorage.jwtToken){
@@ -51,23 +53,27 @@ class App extends Component {
     return (
       <Provider store={ store }>
         <Router>
-          <div className="App">
-            <Navbar />
-            <Route exact path="/" component={Landing} />
-            <div className="container">
-              <Route path="/register" component={Register} />
-              <Route path="/login" component={Login} />
-              <Route path="/home" component={Home} />
-              <Route path="/barchart1" component={Barchart1} />
-              <Route path="/barchart2" component={BarChart2} />
-              <Route path="/linechart" component={LineChart} />
-              <Route path="/piechart" component={PieChart} />
+          <Switch>
+            <div className="App">
+              <Navbar />
+              <Route exact path="/" component={Landing} />
+              <div className="container">
+                <Route path="/register" component={Register} />
+                <Route path="/login" component={Login} />
+                <Route path="/home" component={Home} />
+                {/* <Route path="/barchart1" component={Barchart1} />
+                <Route path="/barchart2" component={BarChart2} />
+                <Route path="/linechart" component={LineChart} />
+                <Route path="/piechart" component={PieChart} /> */}
+              </div>
+              <div className="container-fluid">
+                <Route path="/analytics" component={Analytics} />
+                <Route path="/item" component={Item} />
+                <Route path="/customer" component={Customer} />
+              </div>
+              <Footer />
             </div>
-            <div className="container-fluid">
-              <Route path="/dashboard" component={Dashboard} />
-            </div>
-            <Footer />
-          </div>
+          </Switch>
         </Router>
       </Provider>
     );

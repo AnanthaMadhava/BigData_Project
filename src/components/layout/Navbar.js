@@ -15,14 +15,26 @@ class Navbar extends Component {
 
         const authLinks = (
             <div className="collapse navbar-collapse" id="mobile-nav">
-                <ul className="navbar-nav mr-auto">
+                {/* <ul className="navbar-nav mr-auto">
                     <li className="nav-item">
-                        <Link className="nav-link" to="/dashboard">{' '}Dashboard</Link>
+                        <Link to="/Home" className="nav-link">{' '}Home</Link>
                     </li>
-                </ul>
+                </ul> */}
                 <ul className="navbar-nav ml-auto">
                     <li className="nav-item">
-                        <Link  to="/home" className="nav-link">{' '}Home</Link>
+                        <Link to="/home" className="nav-link">{' '}Home</Link>
+                    </li>
+                    <li className="nav-item">
+                        <Link to="/analytics" className="nav-link">{' '}Analytics</Link>
+                    </li>
+                    <li className="nav-item dropdown">
+                        <a className="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Prediction Model
+                        </a>
+                        <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <Link to="/item" className="dropdown-item">{' '}Item</Link>
+                            <Link to="/customer" className="dropdown-item">{' '}Customer</Link>
+                        </div>
                     </li>
                     <li className="nav-item">
                         <a href="#" className="nav-link" onClick={this.onLogoutClick.bind(this)}>{' '}Logout</a>
@@ -66,7 +78,7 @@ class Navbar extends Component {
                     <Link  to="/register" className="nav-link">Sign Up</Link>
                 </li> */}
                 <li className="nav-item">
-                    <Link  to="/login"  className="nav-link">Login</Link>
+                    <Link to="/login" className="nav-link">Login</Link>
                 </li>
             </ul>
         );
@@ -74,7 +86,7 @@ class Navbar extends Component {
         return (
             <nav className="navbar navbar-expand-sm navbar-dark bg-dark mb-4">
                 <div className="container">
-                <Link  to="/" className="navbar-brand">BIG DATA</Link>
+                <Link  to="/" className="navbar-brand">A A P</Link>
                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#mobile-nav">
                     <span className="navbar-toggler-icon"></span>
                 </button>

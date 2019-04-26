@@ -77,7 +77,7 @@ class Barchart1 extends Component {
     // }
 
     barChart1 = () => {
-        let width = 860, height = 500;
+        let width = 760, height = 500;
         const svg = d3.select('#barchart1')
                 .append('svg')
                 .attr("width", width)
@@ -131,7 +131,7 @@ class Barchart1 extends Component {
             //yaxis(g.append('g'));
             const yaxisG = g.append('g').call(yaxis)
 
-            yaxisG.selectAll('.domain, .rect1-tick-line')
+            yaxisG.selectAll('.domain, .tick line')
                             .remove()
 
             yaxisG.append('text')

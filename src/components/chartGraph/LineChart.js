@@ -42,8 +42,8 @@ class LineChart extends Component {
     linechart = () => {
         // set the dimensions and margins of the graph
         var margin = {top: 50, right: 20, bottom: 50, left: 80},
-        width = 700 - margin.left - margin.right,
-        height = 400 - margin.top - margin.bottom;
+        width = 760 - margin.left - margin.right,
+        height = 430 - margin.top - margin.bottom;
 
         // parse the date / time
         //var parseTime = d3.timeParse("%d-%b-%y");
@@ -72,7 +72,7 @@ class LineChart extends Component {
         .attr("transform", "translate("+ margin.left +"," + margin.top + ")");
 
             svg.append("text")
-            .attr("class","title")
+            .attr("class","rect3-title")
             .attr('x', width/2)
             .attr('y', -20)
             .text("Sales chart")
@@ -118,7 +118,7 @@ class LineChart extends Component {
             // Add the valueline path.
             svg.append("path")
             .datum(data)
-            .attr("class", "line")
+            .attr("class", "rect3-line")
             .attr("d", valueline);
 
 
@@ -178,7 +178,7 @@ class LineChart extends Component {
                 div.transition()        
                     .duration(200)      
                     .style("opacity", .9);      
-                div .html(formatTime(d.key) + "<br/>"  + number(d.value))   
+                div.html(formatTime(d.key) + "<br/>"  + number(d.value))   
                     .style("left", (d3.event.pageX) + "px")     
                     .style("top", (d3.event.pageY - 28) + "px");    
                 })                  

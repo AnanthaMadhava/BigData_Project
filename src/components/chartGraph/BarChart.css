@@ -10,14 +10,13 @@ text{
 .tick text {
     font-size: 1.0em;
     fill: #696969;
-    
 }
 
-.rect1-tick-line {
+/* .rect1-tick-line {
     stroke: #C0C0BB;
     opacity: 0.4;
     
-}
+} */
 
 .rect1-axis-label {
     font-size: 2.0em;

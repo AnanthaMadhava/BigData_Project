@@ -42,8 +42,8 @@ class PieChart extends Component {
 
     piechart = () => {
         var margin = {top: 50, right: 20, bottom: 20, left: 20},
-                width = 800- margin.left - margin.right,
-                height = 600 - margin.top - margin.bottom,
+                width = 760- margin.left - margin.right,
+                height = 500 - margin.top - margin.bottom,
                 radius = 180;
 
             var canvas1 = d3.select("#piechart")

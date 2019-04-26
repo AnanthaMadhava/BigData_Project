@@ -40,7 +40,7 @@ class BarChart2 extends Component {
     }
 
     barChart2 = () => {
-        let width = 860, height = 500;
+        let width = 760, height = 500;
         const svg = d3.select('#barchart2')
                 .append('svg')
                 .attr("width", width)
@@ -76,7 +76,7 @@ class BarChart2 extends Component {
                     .remove();
 
                 xaxisG.append('text')
-                .attr("class", "axis-label")
+                .attr("class", "rect2-axis-label")
                 .attr('y', 40)
                 .attr('x', innerwidth / 2)
                 .attr("fill", "black")
@@ -98,7 +98,7 @@ class BarChart2 extends Component {
                             .remove()
 
             yaxisG.append('text')
-                .attr("class", "Yaxis-label")
+                .attr("class", "rect2-Yaxis-label")
                 .attr('y', -170)
                 .attr('x', -170)
                 .attr("fill", "black")
@@ -112,12 +112,13 @@ class BarChart2 extends Component {
             .data(data)
             .enter()
             .append('rect')
+            .attr('class', 'rect2')
             .attr('y', d => yscale(yvalue(d)))
             .attr('width', d => xscale(xvalue(d)))
             .attr('height', yscale.bandwidth());
 
             g.append('text')
-                .attr("class", "title")
+                .attr("class", "rect2-title")
                 .attr('y', -3)
                 .attr('x', innerwidth/2-40)
                 .text('Top 10 Items According To Their Sale')
