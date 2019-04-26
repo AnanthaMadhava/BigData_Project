@@ -63,7 +63,7 @@ export const logoutUser = (history) => dispatch => {
     dispatch(setCurrentUser({}));
 
     if(history) {
-        history.push('/login');
+        history.push('/');
     } else {
         // Redirect to login
         window.location.href = '/login';
