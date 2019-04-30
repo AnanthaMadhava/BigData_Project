@@ -26,16 +26,16 @@ class LineChart extends Component {
         // console.log(headers);
         axios.post('/montly_sales/linechart',{},{headers})
             .then(res => {
-                // console.log(res.data.result)
+                // console.log(res.data.monthly_sales);
                 // console.log(this.state.result)
                 this.setState({
-                    result: [...res.data.result]
+                    result: [...res.data.monthly_sales]
                 })
-                console.log(this.state.result)
+                // console.log(this.state.result)
                 this.linechart();
             })
             .catch(err => {
-                console.log(err.response.data)
+                console.log(err)
             })
     }
 

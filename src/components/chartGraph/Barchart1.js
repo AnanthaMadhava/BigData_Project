@@ -56,16 +56,16 @@ class Barchart1 extends Component {
         // console.log(headers);
         axios.post('/partywise_aggregated_sales/barchart1',{},{headers})
             .then(res => {
-                // console.log(res.data.result)
+                // console.log(res.data.customerise_aggregated_sales)
                 // console.log(this.state.result)
                 this.setState({
-                    result: [...res.data.result]
+                    result: [...res.data.customerise_aggregated_sales]
                 })
-                console.log(this.state.result)
+                // console.log(this.state.result)
                 this.barChart1();
             })
             .catch(err => {
-                console.log(err.response.data)
+                console.log(err)
             })
     }
 

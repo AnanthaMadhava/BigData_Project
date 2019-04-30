@@ -26,16 +26,16 @@ class BarChart2 extends Component {
         // console.log(headers);
         axios.post('/itemwise_aggregated_salse_in_amt/barchart2',{},{headers})
             .then(res => {
-                // console.log(res.data.result)
+                // console.log(res.data.item_wise_aggregated_sales)
                 // console.log(this.state.result)
                 this.setState({
-                    result: [...res.data.result]
+                    result: [...res.data.item_wise_aggregated_sales]
                 })
-                console.log(this.state.result)
+                // console.log(this.state.result)
                 this.barChart2();
             })
             .catch(err => {
-                console.log(err.response.data)
+                console.log(err)
             })
     }
 

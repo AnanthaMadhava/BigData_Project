@@ -27,16 +27,16 @@ class PieChart extends Component {
         // console.log(headers);
         axios.post('/quaterly_sales/piechart',{},{headers})
             .then(res => {
-                // console.log(res.data.result)
-                // console.log(this.state.result)
+                console.log(res.data.quterly_sales)
+                console.log(this.state.result)
                 this.setState({
-                    result: [...res.data.result]
+                    result: [...res.data.quterly_sales]
                 })
                 console.log(this.state.result)
                 this.piechart();
             })
             .catch(err => {
-                console.log(err.response.data)
+                console.log(err)
             })
     }
 

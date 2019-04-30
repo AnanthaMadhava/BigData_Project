@@ -1,0 +1,35 @@
+text{
+    font-family: sans-serif;
+}
+
+.tick text {
+    font-size: 1.0em;
+    fill: #696969;
+    
+}
+
+ .tick line {
+    stroke: #C0C0BB;
+    opacity: 0.4;
+    
+} 
+
+.axis-label {
+    font-size: 2.0em;
+    fill: #696969;
+    
+}
+
+.Yaxis-label {
+    font-size: 2.0em;
+    fill: #696969;
+    text-anchor: middle;
+    
+}
+
+.title {
+    font-size: 2.5em;
+    text-anchor: middle;
+
+    
+}
