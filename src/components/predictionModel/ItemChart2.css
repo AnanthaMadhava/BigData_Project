@@ -12,7 +12,8 @@ div.tooltip{
 }
 
 text {
-	font-family: sans-serif;
+	font-family: Helvetica;
+	font-style: bold;
 }
 
 .tick text {
@@ -30,7 +31,7 @@ text {
 }
 
 .title {
-	font-size: 3.0em;
-	fill: #635F5D;
+	font-size: 25px;
+	fill: #000000;
 	text-anchor: middle;
 }

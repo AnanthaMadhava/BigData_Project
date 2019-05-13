@@ -12,7 +12,8 @@ class Item extends Component {
     state={
         open: false,
         fullWidth: true,
-        maxWidth: 'sm'
+        maxWidth: 'sm',
+        salesName: ''
     }
 
     componentDidMount() {
@@ -24,11 +25,13 @@ class Item extends Component {
     }
 
     handlechange = (e) => {
+        // console.log(e.target[e.target.value].text)
         d3.select("svg").remove();
         d3.select("svg").remove();
         const item_id = e.target.value;
         this.setState({
-            open: true
+            open: true,
+            salesName : e.target[e.target.value].text
         })
         this.props.dropdownValues(item_id);
 
@@ -89,7 +92,7 @@ class Item extends Component {
                 .style("font-size", "25px")
                 .style("font-family","Helvetica")
                 .style("font-style","Bold")
-                .text(" Item Monthly Sales")
+                .text(this.state.salesName + " Quantity VS Predicted Items")
             const PI = Math.PI,
             arcMinRadius = 10,
             arcPadding = 10,
@@ -204,7 +207,7 @@ class Item extends Component {
             const xvalue =  d => d.qty;
             const yvalue = d => d.name;
 
-            var margin = {top: 50, right: 20, bottom: 50, left:160};
+            var margin = {top: 30, right: 20, bottom: 50, left:160};
             var innerwidth = width - margin.left - margin.right;
             var innerheight = height - margin.top - margin.bottom;
 
@@ -289,7 +292,11 @@ class Item extends Component {
                 .attr("class", "title")
                 .attr('y', -5)
                 .attr('x', innerwidth/2)
-                .text("Items Purchased by Customer")
+                .style("text-anchor", "middle")
+                .style("font-size", "25px")
+                .style("font-family","Helvetica")
+                .style("font-style","Bold")
+                .text(this.state.salesName + " Sales")
 
             // g.selectAll('rect')
             //     .data(data)
@@ -366,18 +373,20 @@ class Item extends Component {
                 </div>
                 <div className="advanced_analysis">
                     <div>
-                        <div className="product_Drop">
-                            <h5>Choose Item</h5>
+                        <div className="adv_analytics">
+                            <div className="product_Drop">
+                                <h5>Choose Item</h5>
+                            </div>
+                            <select style={{height: '50px', width: '200px', padding: '5px', borderRadius: '4px'}} onChange={e => this.handlechange(e)}>
+                                <option disabled selected>Select Your Item</option>
+                                {/* <option value={1}>1</option>
+                                <option value={2}>2</option> */}
+                                {
+                                    dropdown &&
+                                        dropDownList
+                                } 
+                            </select>
                         </div>
-                        <select style={{height: '50px', width: '200px', padding: '5px', borderRadius: '4px'}} onChange={e => this.handlechange(e)}>
-                            <option disabled selected>Select Your Item</option>
-                            {/* <option value={1}>1</option>
-                            <option value={2}>2</option> */}
-                            {
-                                dropdown &&
-                                    dropDownList
-                            } 
-                        </select>
                     </div>
                     <div>
                         {
@@ -385,7 +394,7 @@ class Item extends Component {
                             (
                                 <div className="resultDrop">
                                     <div className="text-center">
-                                        <h3>Items on next seven days buying Predict</h3>
+                                        <h3>Possible Items Can be Purchased</h3>
                                     </div>
                                     <div className="dropdownResult">
                                         <ol>
