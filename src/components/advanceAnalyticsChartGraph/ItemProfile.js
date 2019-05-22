@@ -121,6 +121,10 @@ class ItemProfile extends Component {
             //  }) ;
     }
 
+    componentWillUnmount(){
+        d3.select("svg").remove();
+    }
+
     render() {
         return (
             <div id="itemProfile"></div>

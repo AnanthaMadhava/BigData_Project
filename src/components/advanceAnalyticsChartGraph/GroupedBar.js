@@ -113,6 +113,10 @@ class GroupedBar extends Component {
         render(this.state.result)
     }
 
+    componentWillUnmount(){
+        d3.select("svg").remove();
+    }
+
     render() {
         return (
             <div id="groupBarChart"></div>

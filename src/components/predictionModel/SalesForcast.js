@@ -261,6 +261,10 @@ class SalesForcast extends Component {
         render2(this.state.result2);
     }
 
+    componentWillUnmount(){
+        d3.select("svg").remove();
+    }
+
     render() {
         return (
             <div>

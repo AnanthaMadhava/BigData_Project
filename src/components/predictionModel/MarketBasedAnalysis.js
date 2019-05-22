@@ -159,6 +159,10 @@ class MarketBasedAnalysis extends Component {
         render(this.state.result);
     }
 
+    componentWillUnmount(){
+        d3.select("svg").remove();
+    }
+
     render() {
         return (
             <div>

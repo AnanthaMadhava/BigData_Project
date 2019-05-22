@@ -1,54 +1,32 @@
-/* .line {
-    fill:none;
-    stroke: steelblue;
-    stroke-width: 1.5px;
-  }
-  path.domain { fill: white; }
-  .tick text { fill:black;}
+.line {
+  fill:none;
+  stroke: steelblue;
+  stroke-width: 1.5px;
+}
+
+path.domain { 
+  fill: white; 
+}
+
+.tick text { 
+  fill:black;
+} 
   
-  
-  body{
-    background-color:white; 
-    font-size: 15px ;  
-    font-family: sans-serif;
-    box-shadow: 1px 1px 10px rgba(0,0,0,0.5);
-    border-collapse: collapse;
-    border-spacing: 0;
-  
-  }
-  
-  table {
-      font-family: "Helvetica", "Lucida Sans", "Lucida Sans Unicode", "Luxi Sans", Tahoma, sans-serif;
-      box-shadow: 1px 1px 10px rgba(0,0,0,0.5);
-      border-collapse: collapse;
-      border-spacing: 0;
-  } 
+table {
+  font-family: "Helvetica", "Lucida Sans", "Lucida Sans Unicode", "Luxi Sans", Tahoma, sans-serif;
+  box-shadow: 1px 1px 10px rgba(0,0,0,0.5);
+  border-collapse: collapse;
+  border-spacing: 0;
+} 
    
-  table {
-      margin: auto;
-  }  
+table {
+  margin: auto;
+}
   
-  table, td, th {
-      padding: 8px 8px;
-       text-align: left; 
-      border: 1px solid rgb(0, 0, 0);
-  }
-  
-  th {
-      background-color: rgb(109, 124, 192);
-      color:white;
-  } 
-  
-  
-  
-  text {
-      font-family:"Helvetica", "Lucida Sans", "Lucida Sans Unicode", "Luxi Sans", Tahoma, sans-serif;
-      font-size: 10px;
-      font-weight: bold;
-      fill: white;
-      text-anchor: left;
-      text-decoration-color: brown;
-  } */
+th {
+  background-color: rgb(109, 124, 192);
+  color:white;
+}
   
   
   /* #salesForcastTable {
@@ -73,18 +51,17 @@
   } */
 
 #salesForcast {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
 }
 
 #salesForcast > div {
-    margin: 0 50px 0 50px;
-    text-align: center;
+  margin: 0 50px 0 50px;
+  text-align: center;
 }
 
 #salesForcastGraph {
-    margin-top: 20px;
-    text-align: center;
+  margin-top: 20px;
+  text-align: center;
+  font-weight: 600;
 }
-
-  

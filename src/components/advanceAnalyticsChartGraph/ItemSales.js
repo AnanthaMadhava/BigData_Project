@@ -120,6 +120,10 @@ class ItemSales extends Component {
             //  }) ;
     }
 
+    componentWillUnmount(){
+        d3.select("svg").remove();
+    }
+
     render() {
         return (
             <div id="itemSales"></div>
