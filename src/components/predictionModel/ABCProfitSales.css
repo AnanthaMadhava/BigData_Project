@@ -1,0 +1,27 @@
+td, th {
+    padding: 1px 4px;
+    border: 1px black solid;
+}
+
+#ABCProfitSalesPie1 {    
+	position:absolute;
+	top:10px;
+	left:260px;
+	width:400px;
+	height: 400px; 
+}
+
+#ABCProfitSalesPie2 {    
+	position:absolute;
+	top:10px;
+	left:620px;
+	width:400px;
+	height: 400px; 
+}
+
+#ABCProfitSalesTable {    
+	position:absolute;
+	top:410px;
+	left:250px;
+	height: 200px;
+}

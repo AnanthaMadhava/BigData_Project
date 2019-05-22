@@ -24,20 +24,29 @@ class Navbar extends Component {
                     <li className="nav-item">
                         <Link to="/home" className="nav-link">{' '}Home</Link>
                     </li>
-                    <li className="nav-item">
-                        <Link to="/analytics" className="nav-link">{' '}Analytics</Link>
+                    <li className="nav-item dropdown">
+                        <Link className="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Analytics
+                        </Link>
+                        <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <Link to="/analytics" className="dropdown-item">{' '}Analytics</Link>
+                            <Link to="/advanceAnalytics" className="dropdown-item">{' '}Advanced Analytics</Link>
+                        </div>
                     </li>
                     <li className="nav-item dropdown">
-                        <a className="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <Link className="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Prediction Model
-                        </a>
+                        </Link>
                         <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                             <Link to="/item" className="dropdown-item">{' '}Item</Link>
                             <Link to="/customer" className="dropdown-item">{' '}Customer</Link>
+                            <Link to="/marketAnalysis" className="dropdown-item">{' '}Market Based Analysis</Link>
+                            <Link to="/ABCProfitSales" className="dropdown-item">{' '}ABC Profit Sales</Link>
+                            <Link to="/salesForcast" className="dropdown-item">{' '}Sales Forcast</Link>
                         </div>
                     </li>
                     <li className="nav-item">
-                        <a href="#" className="nav-link" onClick={this.onLogoutClick.bind(this)}>{' '}Logout</a>
+                        <Link href="#" className="nav-link" onClick={this.onLogoutClick.bind(this)}>{' '}Logout</Link>
                     </li>
                     {/* <li className="nav-item dropdown">
                         <a className="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -98,7 +107,7 @@ class Navbar extends Component {
                         </Link>
                     </li>
                     </ul> */}
-                    { isAuthenticated ? authLinks : guestLinks }
+                    { isAuthenticated ? authLinks : null }
                 </div>
                 </div>
             </nav>

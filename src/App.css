@@ -108,6 +108,10 @@ img {
   align-items: center;
   font-size: 2em;
   color: #ffffff;
+  border: 1px solid #444;
+  border-color: rgb(236, 217, 215);
+  border-radius: 15px;
+  overflow: hidden;
 }
 
 .resultDrop {
@@ -135,6 +139,13 @@ img {
   border: 1px solid #444;
   border-color: rgb(236, 217, 215);
   border-radius: 15px;
+}
+
+.adv_analytics {
+  display: flex;
+  justify-content: center;
+  height: 75vh;
+  align-items: center;
 }
 
 .tiles {

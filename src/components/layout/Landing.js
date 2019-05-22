@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
-import Trading from '../../img/graph/trading.jpeg';
+import Distribution from '../../img/graph/Distributors-Agency.jpg';
 import Retail from '../../img/graph/retail.jpg';
 import WebDataMaintaining from '../../img/graph/webDataMaintaining.jpg'
 import { PropTypes } from 'prop-types';
@@ -117,9 +117,9 @@ class Landing extends Component {
                         </div>
                         <div className="landing-tiles">
                             <Link to="/login" className="title-link">
-                                <img src={Trading} alt="Sample photo" style={{height: '200px'}} />
+                                <img src={Distribution} alt="Sample photo" style={{height: '200px'}} />
                                 <div className="text">
-                                    <h3>Trading</h3>
+                                    <h3>Distributions / Agency</h3>
                                     {/* <p>Collaboratively administrate empowered markets via plug-and-play networks.</p> */}
                                 </div>
                             </Link>
@@ -133,7 +133,7 @@ class Landing extends Component {
                             <Link to="/login" className="title-link">
                                 <img src={WebDataMaintaining} alt="Sample photo" style={{height: '200px'}} />
                                 <div className="text">
-                                    <h3>WebData Maintaining</h3>
+                                    <h3>Web Data Analysis</h3>
                                     {/* <p>Collaboratively administrate empowered markets via plug-and-play networks.</p> */}
                                 </div>
                             </Link>

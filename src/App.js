@@ -12,20 +12,26 @@ import Footer from './components/layout/Footer';
 import Landing from './components/layout/Landing';
 
 import Analytics from './components/analytics/Analytics';
+import AdvancedAnalytics from './components/analytics/AdvancedAnalytics';
 
 import Register from './components/register__login/Register';
 import Login from './components/register__login/Login';
 
 import Item from './components/predictionModel/Item';
 import Customer from './components/predictionModel/Customer';
+import MarketBasedAnalysis from './components/predictionModel/MarketBasedAnalysis';
+import ABCProfitSales from './components/predictionModel/ABCProfitSales';
+import SalesForcast from './components/predictionModel/SalesForcast';
 
-import Barchart1 from './components/chartGraph/Barchart1';
+import Barchart1 from './components/analyticsChartGraph/Barchart1';
+import BarChart2 from './components/analyticsChartGraph/BarChart2';
+import LineChart from './components/analyticsChartGraph/LineChart';
+import PieChart from './components/analyticsChartGraph/PieChart';
 
 import './App.css';
-import BarChart2 from './components/chartGraph/BarChart2';
-import LineChart from './components/chartGraph/LineChart';
-import PieChart from './components/chartGraph/PieChart';
+
 import Home from './components/home/Home';
+
 
 // Check for token
 if(localStorage.jwtToken){
@@ -68,8 +74,12 @@ class App extends Component {
               </div>
               <div className="container-fluid">
                 <Route path="/analytics" component={Analytics} />
+                <Route path="/advanceAnalytics" component={AdvancedAnalytics} />
                 <Route path="/item" component={Item} />
                 <Route path="/customer" component={Customer} />
+                <Route path="/marketAnalysis" component={MarketBasedAnalysis} />
+                <Route path="/ABCProfitSales" component={ABCProfitSales} />
+                <Route path="/salesForcast" component={SalesForcast} />
               </div>
               <Footer />
             </div>

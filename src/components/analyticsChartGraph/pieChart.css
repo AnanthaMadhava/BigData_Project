@@ -1,0 +1,24 @@
+.arc text{
+    font: 12px sans-serif;
+    text-anchor: middle;
+}
+
+.arc path{
+    stroke: #fff;
+    opacity: 0.9;
+}
+
+.arc2 text{
+    font: 10px sans-serif;
+    text-anchor: middle;
+}
+
+.arc2 path{
+    stroke: #fff
+}
+
+.pie-title {
+    /* font-size: 1.5em; */
+    text-anchor: middle;
+    font-size: 1em;
+}

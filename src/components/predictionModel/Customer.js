@@ -73,7 +73,7 @@ class Customer extends Component {
     };
 
     customerChart1 = (data) => {
-        const width = 800,
+        const width = 660,
             height = 500,
             chartRadius = height / 2 - 50;
             const color = d3.scaleOrdinal(d3.schemeCategory10);
@@ -89,8 +89,8 @@ class Customer extends Component {
                 .attr("x",0)
                 .attr("y", -230)
                 .style("text-anchor", "middle")
-                .style("font-size", "25px")
-                .style("font-family","Helvetica")
+                .style("font-size", "20px")
+                .style("font-family","Helvetica Neue")
                 .style("font-style","Bold")
                 .text(this.state.customerSalesName + " Quantity VS Predicted Customers")
             const PI = Math.PI,
@@ -190,7 +190,7 @@ class Customer extends Component {
     }
 
     customerChart2 = (data) => {
-        let width = 760, height = 500;
+        let width = 600, height = 480;
         const svg = d3.select("#customerChart2").append('svg')
                         .attr("width", width)
                         .attr("height", height);
@@ -299,8 +299,8 @@ class Customer extends Component {
                 .attr('y', -5)
                 .attr('x', innerwidth/2)
                 .style("text-anchor", "middle")
-                .style("font-size", "25px")
-                .style("font-family","Helvetica")
+                .style("font-size", "20px")
+                .style("font-family","Helvetica Neue")
                 .style("font-style","Bold")
                 .text(this.state.customerSalesName + " Sales")
 
@@ -399,7 +399,7 @@ class Customer extends Component {
                             (
                                 <div className="resultDrop">
                                     <div className="text-center">
-                                        <h3>Possible Customer who may buy {this.state.customerSalesName}</h3>
+                                        <h3>Probable items that could be purchased next 7 days</h3>
                                     </div>
                                     <div className="dropdownResult">
                                         <ol>

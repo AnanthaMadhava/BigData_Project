@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import BarChart1 from '../analyticsChartGraph/Barchart1';
-import BarChart2 from '../analyticsChartGraph/BarChart2';
-import LineChart from  '../analyticsChartGraph/LineChart';
-import PieChart from '../analyticsChartGraph/PieChart';
+import GroupedBar from '../advanceAnalyticsChartGraph/GroupedBar';
+import ItemProfile from '../advanceAnalyticsChartGraph/ItemProfile';
+import ItemSales from '../advanceAnalyticsChartGraph/ItemSales';
+import LineChart from '../advanceAnalyticsChartGraph/LineChart';
 
-class Analytics extends Component {
+class AdvancedAnalytics extends Component {
 
     componentDidMount() {
         if(!this.props.auth.isAuthenticated){
@@ -18,20 +18,20 @@ class Analytics extends Component {
         return (
             <div>
                 <div className="text-center">
-                    <h2>Sales Insights</h2>
+                    <h2>Graph</h2>
                 </div>
                 <div className="dashboard-Graph">
                     <div>
-                        <BarChart2 />
+                        <GroupedBar />
                     </div>
                     <div>
-                        <PieChart />
+                        <ItemProfile />
+                    </div>
+                    <div>
+                        <ItemSales />
                     </div>
                     <div>
                         <LineChart />
-                    </div>
-                    <div>
-                        <BarChart1 />
                     </div>
                 </div>
             </div>
@@ -39,7 +39,7 @@ class Analytics extends Component {
     }
 }
 
-Analytics.propTypes = {
+AdvancedAnalytics.propTypes = {
     auth: PropTypes.object.isRequired
 }
 
@@ -47,4 +47,4 @@ const mapStateToProps = (state) => ({
     auth: state.auth
 });
 
-export default connect(mapStateToProps)(Analytics);
+export default connect(mapStateToProps)(AdvancedAnalytics);
