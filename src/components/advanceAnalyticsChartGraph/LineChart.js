@@ -1,4 +1,8 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { API_URL } from '../../actions/types';
+import axios from 'axios';
 import * as d3 from 'd3';
 import LineChartData from './LineChart.json';
 import './LineChart.css';
@@ -6,11 +10,28 @@ import './LineChart.css';
 class LineChart extends Component {
 
     state = {
-        result : LineChartData
+        result : []
     }
 
     componentDidMount(){
-        this.lineChart();
+        const headers = {
+            'X-USER-ID': this.props.auth.user.username,
+            'X-USER-TOKEN': localStorage.jwtToken
+        }
+        // console.log(headers);
+        axios.get(`${API_URL}/get_monthly_sales/monthlyChart`,{headers})
+            .then(res => {
+                // console.log(res.data.monthly_sales)
+                // console.log(this.state.result)
+                this.setState({
+                    result: [...res.data.monthly_sales]
+                })
+                // console.log(this.state.result)
+                this.lineChart();
+            })
+            .catch(err => {
+                console.log(err)
+            })
     }
 
     lineChart = () => {
@@ -60,7 +81,7 @@ class LineChart extends Component {
             d.monthly_sales = +d.monthly_sales;
             });
 
-            console.log(data)
+            // console.log(data)
 
             function sortByDateAscending(a, b) {
                 // Dates will be cast to numbers automagically:
@@ -69,12 +90,12 @@ class LineChart extends Component {
             
             data = data.sort(sortByDateAscending);
 
-            console.log(data)
+            // console.log(data)
 
 
             // Scale the range of the data
             x.domain(d3.extent(data, function(d) { return d.key; }));
-            console.log(d3.extent(data, function(d) { return d.key; }))
+            // console.log(d3.extent(data, function(d) { return d.key; }))
             //x.domain(data.map(function(d) { return d.key; }));
             y.domain([0, d3.max(data, function(d) { return d.monthly_sales; })]);
 
@@ -168,4 +189,12 @@ class LineChart extends Component {
     }
 }
 
-export default LineChart;
+LineChart.propTypes = {
+    auth: PropTypes.object.isRequired
+}
+
+const mapStateToProps = (state) => ({
+    auth: state.auth
+});
+
+export default connect(mapStateToProps)(LineChart);

@@ -1,20 +1,21 @@
 import axios from 'axios';
 
-import { GET_CUSTOMER_DROPDOWN_LIST, CUSTOMER_DROPDOWN_LODING, GET_CUSTOMER_DROPDOWN_RESULT } from './types';
+import { API_URL, GET_CUSTOMER_DROPDOWN_LIST, CUSTOMER_DROPDOWN_LODING, GET_CUSTOMER_DROPDOWN_RESULT } from './types';
 
 // Get Dropdown Values
-export const customerDropdown = () => dispatch => {
+export const customerDropdown = (username) => dispatch => {
     dispatch(getDropdownLoding());
     const headers = {
-        'Authorization': localStorage.jwtToken
+        'X-USER-ID': username,
+        'X-USER-TOKEN': localStorage.jwtToken
     }
     // console.log(headers);
-    axios.get('/parties/Customer',{headers})
+    axios.get(`${API_URL}/parties/Customer`,{headers})
         .then(res => {
-            //console.log(res.data);
+            // console.log(res.data);
             dispatch ({
                 type: GET_CUSTOMER_DROPDOWN_LIST,
-                payload: res.data
+                payload: res.data.top10paries
             });
         })
         .catch(err => {
@@ -32,15 +33,17 @@ export const getDropdownLoding = () => {
     }
 }
 
-export const customerDropdownValues = (value) => dispatch => {
+export const customerDropdownValues = (value, username) => dispatch => {
     const headers = {
-        'Authorization': localStorage.jwtToken
+        'X-USER-ID': username,
+        'X-USER-TOKEN': localStorage.jwtToken
     }
-    axios.post('/parties/Customer',{"party_id": value}, {headers})
+    axios.post(`${API_URL}/parties/Customer`,{"party_id": value}, {headers})
         .then(res => {
+            // console.log(res.data);
             dispatch ({
                 type: GET_CUSTOMER_DROPDOWN_RESULT,
-                payload: res.data.Possible_items
+                payload: res.data["Possible_items "]
             });
         })
         .catch(err => {

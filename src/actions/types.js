@@ -1,3 +1,5 @@
+export const API_URL = "http://35.165.114.91:8081";
+
 export const GET_ERRORS = 'GET_ERRORS';
 
 export const SET_CURRENT_USER = 'SET_CURRENT_USER';

@@ -78,7 +78,7 @@ class Login extends Component {
 
         if(!err) {
             const userData = {
-                username : this.state.email,
+                user_id : this.state.email,
                 password : this.state.password
             };
 

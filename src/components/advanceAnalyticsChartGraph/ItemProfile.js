@@ -1,4 +1,8 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { API_URL } from '../../actions/types';
+import axios from 'axios';
 import * as d3 from 'd3';
 import ItemProfileDate from './ItemProfile.json';
 import './ItemProfile.css';
@@ -6,11 +10,28 @@ import './ItemProfile.css';
 class ItemProfile extends Component {
 
     state = {
-        result : ItemProfileDate
+        result : []
     }
 
     componentDidMount() {
-        this.itemProfile();
+        const headers = {
+            'X-USER-ID': this.props.auth.user.username,
+            'X-USER-TOKEN': localStorage.jwtToken
+        }
+        // console.log(headers);
+        axios.get(`${API_URL}/top10_items_on_profit/itemProfile`,{headers})
+            .then(res => {
+                // console.log(res.data.top10_items_based_on_profit)
+                // console.log(this.state.result)
+                this.setState({
+                    result: [...res.data.top10_items_based_on_profit]
+                })
+                // console.log(this.state.result)
+                this.itemProfile();
+            })
+            .catch(err => {
+                console.log(err)
+            })
     }
 
     itemProfile = () => {
@@ -40,7 +61,7 @@ class ItemProfile extends Component {
                             .attr('transform', "translate(" + margin.left + "," + margin.top + ")");
 
 
-                console.log(data)
+                // console.log(data)
 
                 function sortAscending(a, b){
                     return a.vitemname - b.vitemname;
@@ -106,7 +127,7 @@ class ItemProfile extends Component {
                     //.style("font-size", "20px")
                     .text("Top10 items based on profit")
 
-                console.log(innerwidth)
+                // console.log(innerwidth)
             };    
             render(this.state.result);
 
@@ -132,4 +153,12 @@ class ItemProfile extends Component {
     }
 }
 
-export default ItemProfile;
+ItemProfile.propTypes = {
+    auth: PropTypes.object.isRequired
+}
+
+const mapStateToProps = (state) => ({
+    auth: state.auth
+});
+
+export default connect(mapStateToProps)(ItemProfile);

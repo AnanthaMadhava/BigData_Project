@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { piechart } from '../../actions/graphActions';
+import { API_URL } from '../../actions/types';
 import axios from 'axios';
 import * as d3 from 'd3';
 import './pieChart.css';
@@ -22,17 +23,18 @@ class PieChart extends Component {
 
         // this.piechart();
         const headers = {
-            'Authorization': localStorage.jwtToken
+            'X-USER-ID': this.props.auth.user.username,
+            'X-USER-TOKEN': localStorage.jwtToken
         }
         // console.log(headers);
-        axios.post('/quaterly_sales/piechart',{},{headers})
+        axios.get(`${API_URL}/quaterly_sales/piechart`,{headers})
             .then(res => {
-                console.log(res.data.quterly_sales)
-                console.log(this.state.result)
+                // console.log(res.data["customerise aggregated sales"])
+                // console.log(this.state.result)
                 this.setState({
-                    result: [...res.data.quterly_sales]
+                    result: [...res.data["customerise aggregated sales"]]
                 })
-                console.log(this.state.result)
+                // console.log(this.state.result)
                 this.piechart();
             })
             .catch(err => {

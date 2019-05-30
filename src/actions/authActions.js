@@ -1,7 +1,7 @@
 import axios from 'axios';
 import setAuthToken from '../utils/setAuthToken';
 import jwt_decode from 'jwt-decode';
-import { GET_ERRORS, SET_CURRENT_USER } from './types';
+import { API_URL, GET_ERRORS, SET_CURRENT_USER } from './types';
 
 // Register User
 export const registerUser = (userData, history) => dispatch => {
@@ -18,19 +18,21 @@ export const registerUser = (userData, history) => dispatch => {
 // Login - Get User Token
 export const loginUser = userData => dispatch => {
     function login() {
-    axios.post('/auth', userData)
+    axios.post(`${API_URL}/auth/`, userData)
         .then(res => {
             // Save to localstorage
-            const token = "JWT " + res.data.access_token;
+            const token = res.data.tkn.token;
+            // console.log(token);
+            // console.log(res.data);
             console.log('Token');
             // Set token to LocalStorage
             localStorage.setItem('jwtToken', token);
             // Set token to Auth header
             setAuthToken(token);
             //  Decode token to get user data
-            const decoded = jwt_decode(token);
+            // const decoded = jwt_decode(token);
             // Set current user
-            dispatch(setCurrentUser(decoded));
+            dispatch(setCurrentUser(token));
         })
         .catch(err => 
             dispatch({
@@ -46,10 +48,35 @@ export const loginUser = userData => dispatch => {
 };
 
 // Set logged in user
-export const setCurrentUser = (decoded) => {
-    return {
-        type: SET_CURRENT_USER,
-        payload: decoded
+export const setCurrentUser = token => dispatch => {
+    // return {
+    //     type: SET_CURRENT_USER,
+    //     payload: decoded
+    // }
+    if(token === localStorage.jwtToken){
+        // console.log(token);
+        const headers = {
+            'X-USER-TOKEN': token
+        }
+        axios.get(`${API_URL}/user_domain/`,{headers})
+            .then(res => 
+                dispatch({
+                    type: SET_CURRENT_USER,
+                    payload: res.data
+                })
+            )
+            .catch(err => { 
+                dispatch({
+                    type: GET_ERRORS,
+                    payload: err.response.data
+                })
+            });
+    } else {
+        // console.log('Logout');
+        dispatch ({
+            type: SET_CURRENT_USER,
+            payload: {}
+        })
     }
 }
 

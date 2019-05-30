@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bargraph2 } from '../../actions/graphActions';
+import { API_URL } from '../../actions/types';
 import axios from 'axios';
 import * as d3 from 'd3';
 import './BarChart2.css';
@@ -21,15 +22,16 @@ class BarChart2 extends Component {
 
         // this.barChart2();
         const headers = {
-            'Authorization': localStorage.jwtToken
+            'X-USER-ID': this.props.auth.user.username,
+            'X-USER-TOKEN': localStorage.jwtToken
         }
         // console.log(headers);
-        axios.post('/itemwise_aggregated_salse_in_amt/barchart2',{},{headers})
+        axios.get(`${API_URL}/itemwise_aggregated_salse_in_amt/barchart2`,{headers})
             .then(res => {
-                // console.log(res.data.item_wise_aggregated_sales)
+                // console.log(res.data["item wise aggregated sales"])
                 // console.log(this.state.result)
                 this.setState({
-                    result: [...res.data.item_wise_aggregated_sales]
+                    result: [...res.data["item wise aggregated sales"]]
                 })
                 // console.log(this.state.result)
                 this.barChart2();

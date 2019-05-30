@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { linechart } from '../../actions/graphActions';
+import { API_URL } from '../../actions/types';
 import axios from 'axios';
 import * as d3 from 'd3';
 import './LineChart.css';
@@ -21,15 +22,16 @@ class LineChart extends Component {
 
         // this.linechart()
         const headers = {
-            'Authorization': localStorage.jwtToken
+            'X-USER-ID': this.props.auth.user.username,
+            'X-USER-TOKEN': localStorage.jwtToken
         }
         // console.log(headers);
-        axios.post('/montly_sales/linechart',{},{headers})
+        axios.get(`${API_URL}/montly_sales/linechart`,{headers})
             .then(res => {
-                // console.log(res.data.monthly_sales);
+                // console.log(res.data["monthly sales"]);
                 // console.log(this.state.result)
                 this.setState({
-                    result: [...res.data.monthly_sales]
+                    result: [...res.data["monthly sales"]]
                 })
                 // console.log(this.state.result)
                 this.linechart();

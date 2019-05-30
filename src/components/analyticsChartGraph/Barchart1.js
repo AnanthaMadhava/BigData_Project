@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bargraph1 } from '../../actions/graphActions';
+import { API_URL } from '../../actions/types';
 import axios from 'axios';
 import * as d3 from 'd3';
 import './BarChart.css';
@@ -51,15 +52,16 @@ class Barchart1 extends Component {
 
         // this.barChart1();
         const headers = {
-            'Authorization': localStorage.jwtToken
+            'X-USER-ID': this.props.auth.user.username,
+            'X-USER-TOKEN': localStorage.jwtToken
         }
         // console.log(headers);
-        axios.post('/partywise_aggregated_sales/barchart1',{},{headers})
+        axios.get(`${API_URL}/partywise_aggregated_sales/barchart1`,{headers})
             .then(res => {
-                // console.log(res.data.customerise_aggregated_sales)
+                // console.log(res.data["customerise aggregated sales"])
                 // console.log(this.state.result)
                 this.setState({
-                    result: [...res.data.customerise_aggregated_sales]
+                    result: [...res.data["customerise aggregated sales"]]
                 })
                 // console.log(this.state.result)
                 this.barChart1();

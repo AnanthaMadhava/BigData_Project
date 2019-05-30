@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { customerDropdown, customerDropdownValues } from '../../actions/customerdropActions';
+import { API_URL } from '../../actions/types';
 import axios from 'axios';
 import * as d3 from 'd3';
 import './CustomerChart1.css';
@@ -21,7 +22,7 @@ class Customer extends Component {
             this.props.history.push('/login');
         }
 
-        this.props.customerDropdown();
+        this.props.customerDropdown(this.props.auth.user.username);
     }
 
     handlechange = (e) => {
@@ -33,35 +34,38 @@ class Customer extends Component {
             open: true,
             customerSalesName : e.target[e.target.value].text
         })
-        this.props.customerDropdownValues(item_id);
+        this.props.customerDropdownValues(item_id, this.props.auth.user.username);
 
         const headers = {
-            'Authorization': localStorage.jwtToken
+            'X-USER-ID': this.props.auth.user.username,
+            'X-USER-TOKEN': localStorage.jwtToken
         }
         // console.log(headers);
-        axios.post('/get_party_monthly_sales/Customer',{"party_id": item_id},{headers})
+        axios.post(`${API_URL}/get_party_monthly_sales/Customer`,{"party_id": item_id},{headers})
             .then(res => {
-                console.log(res.data.party_montly_sales);
+                // console.log(res.data);
+                // console.log(res.data["party montly sales"]);
                 // console.log(this.state.result)
                 // this.setState({
                 //     result: [...res.data.customerise_aggregated_sales]
                 // })
                 // // console.log(this.state.result)
-                this.customerChart1(res.data.party_montly_sales);
+                this.customerChart1(res.data["party montly sales"]);
             })
             .catch(err => {
                 console.log(err)
             })
 
-        axios.post('/party_puchased_items_qty/Customer',{"party_id": item_id},{headers})
+        axios.post(`${API_URL}/party_puchased_items_qty/Customer`,{"party_id": item_id},{headers})
             .then(res => {
-                console.log(res.data.party_purchaed_by_items_qty);
+                // console.log(res.data)
+                // console.log(res.data["party purchaed by items qty"]);
                 // console.log(this.state.result)
                 // this.setState({
                 //     result: [...res.data.customerise_aggregated_sales]
                 // })
                 // // console.log(this.state.result)
-                this.customerChart2(res.data.party_purchaed_by_items_qty);
+                this.customerChart2(res.data["party purchaed by items qty"]);
             })
             .catch(err => {
                 console.log(err)
@@ -221,7 +225,7 @@ class Customer extends Component {
                         .attr('transform', "translate(" + margin.left + "," + margin.top + ")");
 
 
-            console.log(data)
+            // console.log(data)
 
             function sortAscending(a, b){
                 return a.qty - b.qty;
@@ -316,10 +320,7 @@ class Customer extends Component {
             //             return d.value;
             //     })
 
-            console.log(innerwidth)
-
-            
-
+            // console.log(innerwidth)
         };    
         render(data);
     }

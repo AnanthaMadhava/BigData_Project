@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { dropdown, dropdownValues } from '../../actions/dropdownActions';
+import { API_URL } from '../../actions/types';
 import axios from 'axios';
 import * as d3 from 'd3';
 import './ItemChart1.css';
@@ -21,7 +22,7 @@ class Item extends Component {
             this.props.history.push('/login');
         }
 
-        this.props.dropdown();
+        this.props.dropdown(this.props.auth.user.username);
     }
 
     handlechange = (e) => {
@@ -33,35 +34,38 @@ class Item extends Component {
             open: true,
             salesName : e.target[e.target.value].text
         })
-        this.props.dropdownValues(item_id);
+        this.props.dropdownValues(item_id, this.props.auth.user.username);
 
         const headers = {
-            'Authorization': localStorage.jwtToken
+            'X-USER-ID': this.props.auth.user.username,
+            'X-USER-TOKEN': localStorage.jwtToken
         }
         // console.log(headers);
-        axios.post('/get_item_monthly_sales/item',{"item_id": item_id},{headers})
+        axios.post(`${API_URL}/get_item_monthly_sales/item`,{"item_id": item_id},{headers})
             .then(res => {
-                console.log(res.data.item_montly_sales);
+                // console.log(res.data);
+                // console.log(res.data["item montly sales "]);
                 // console.log(this.state.result)
                 // this.setState({
                 //     result: [...res.data.customerise_aggregated_sales]
                 // })
                 // // console.log(this.state.result)
-                this.itemChart1(res.data.item_montly_sales);
+                this.itemChart1(res.data["item montly sales "]);
             })
             .catch(err => {
                 console.log(err)
             })
 
-        axios.post('/item_qty_sold_to_party/item',{"item_id": item_id},{headers})
+        axios.post(`${API_URL}/item_qty_sold_to_party/item`,{"item_id": item_id},{headers})
             .then(res => {
-                console.log(res.data.item_purchaed_by_customers);
+                // console.log(res.data);
+                // console.log(res.data["item purchaed by customers"]);
                 // console.log(this.state.result)
                 // this.setState({
                 //     result: [...res.data.customerise_aggregated_sales]
                 // })
                 // // console.log(this.state.result)
-                this.itemChart2(res.data.item_purchaed_by_customers);
+                this.itemChart2(res.data["item purchaed by customers"]);
             })
             .catch(err => {
                 console.log(err)
@@ -330,7 +334,7 @@ class Item extends Component {
         }
 
         const {dropdownResult} = this.props.drop;
-        // console.log(dropdownResult);
+        console.log(dropdownResult);
         
         return (
             // <div style={{marginBottom: '665px'}}>

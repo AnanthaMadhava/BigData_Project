@@ -1,17 +1,36 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { API_URL } from '../../actions/types';
+import axios from 'axios';
 import * as d3 from 'd3';
 import GroupedBarData from './GroupedBar.json'
 
 class GroupedBar extends Component {
 
     state = {
-        result: GroupedBarData
+        result: []
     }
 
     componentDidMount(){
-        this.groupedBar();
+        const headers = {
+            'X-USER-ID': this.props.auth.user.username,
+            'X-USER-TOKEN': localStorage.jwtToken
+        }
+        // console.log(headers);
+        axios.get(`${API_URL}/get_monthly_sales_yearwise/groupedBar`,{headers})
+            .then(res => {
+                // console.log(res.data.monthly_sales_yearwise)
+                // console.log(this.state.result)
+                this.setState({
+                    result: [...res.data.monthly_sales_yearwise]
+                })
+                // console.log(this.state.result)
+                this.groupedBar();
+            })
+            .catch(err => {
+                console.log(err)
+            })
     }
 
     groupedBar = () => {
@@ -42,7 +61,7 @@ class GroupedBar extends Component {
             var columns = d3.keys(data[0])
 
             var keys = columns.slice(0, 2);
-            console.log(keys)
+            // console.log(keys)
 
             x0.domain(data.map(function(d) { return d.month; }));
             x1.domain(keys).rangeRound([0, x0.bandwidth()]);

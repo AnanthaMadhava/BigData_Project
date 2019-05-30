@@ -1,4 +1,8 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { API_URL } from '../../actions/types';
+import axios from 'axios';
 import * as d3 from 'd3';
 import ItemSalesData from './ItemSales.json';
 import './ItemSales.css';
@@ -6,11 +10,28 @@ import './ItemSales.css';
 class ItemSales extends Component {
 
     state = {
-        result : ItemSalesData
+        result : []
     }
 
     componentDidMount(){
-        this.itemSales();
+        const headers = {
+            'X-USER-ID': this.props.auth.user.username,
+            'X-USER-TOKEN': localStorage.jwtToken
+        }
+        // console.log(headers);
+        axios.get(`${API_URL}/top10_items_on_sales/itemSales`,{headers})
+            .then(res => {
+                // console.log(res.data.top10_items_based_on_sales)
+                // console.log(this.state.result)
+                this.setState({
+                    result: [...res.data.top10_items_based_on_sales]
+                })
+                // console.log(this.state.result)
+                this.itemSales();
+            })
+            .catch(err => {
+                console.log(err)
+            })
     }
 
     itemSales = () => {
@@ -40,7 +61,7 @@ class ItemSales extends Component {
                             .attr('transform', "translate(" + margin.left + "," + margin.top + ")");
 
 
-                console.log(data)
+                // console.log(data)
 
                 function sortAscending(a, b){
                     return a.vitemname - b.vitemname;
@@ -105,7 +126,7 @@ class ItemSales extends Component {
                     .attr('x', innerwidth/2)
                     .text("Top10 items based on sales")
 
-                console.log(innerwidth)
+                // console.log(innerwidth)
             };    
             render(this.state.result)
 
@@ -131,4 +152,12 @@ class ItemSales extends Component {
     }
 }
 
-export default ItemSales;
+ItemSales.propTypes = {
+    auth: PropTypes.object.isRequired
+}
+
+const mapStateToProps = (state) => ({
+    auth: state.auth
+});
+
+export default connect(mapStateToProps)(ItemSales);
